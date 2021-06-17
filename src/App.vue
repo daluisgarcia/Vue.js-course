@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Making reference to users computed property -->
     <User v-for="user in users"
           v-bind:key="user.id"
           :name="user.name"
@@ -11,7 +12,8 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import { mapActions, mapState } from 'vuex';
+
   import User from "./components/User";
   import Counter from "./components/Counter";
 
@@ -21,19 +23,21 @@
       User,
       Counter,
     },
-    data(){
-      return {
-        users: []
-      }
-    },
+    // data(){
+    //   return {
+    //     users: []
+    //   }
+    // },
     methods:{
-      getUsers(){
-        axios.get('https://jsonplaceholder.typicode.com/users')
-        .then( (response) => this.users = response.data )
-      }
+      ...mapActions(['setUsers']),
+    },
+    computed: {
+      // Importing
+      ...mapState(['users']),
     },
     mounted() {
-      this.getUsers();
+      // Calling the action imported from Vuex store
+      this.setUsers();
     }
   }
 </script>

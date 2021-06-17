@@ -13,17 +13,12 @@
 
     export default {
         name: "Counter",
-        props: [
-
-        ],
         methods:{
             increment(){
                 this.$store.commit('increment');
-                console.log(this.$store.state.count)
             },
             decrement(){
                 this.$store.commit('decrement');
-                console.log(this.$store.state.count)
             },
         },
         computed: mapState({
